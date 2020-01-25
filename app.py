@@ -37,8 +37,8 @@ def welcome():
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/<start><br/>"
-        f"/api/v1.0/<start>/<end>"
+        f"/api/v1.0/start<br/>"
+        f"/api/v1.0/start/end"
     )
 
 #------------------------------------------------
@@ -91,8 +91,8 @@ def tobs():
     session = Session(engine)
     
     # Recent date
-    last_date = session.query(Measurement.date).order_by(Measurement.date.desc()).first()
-    last_date = datetime.strptime(latest_date_query[0], '%Y-%m-%d').date()
+    latest_date = session.query(Measurement.date).order_by(Measurement.date.desc()).first()
+    last_date = datetime.strptime(latest_date[0], '%Y-%m-%d').date()
     
     # One year ago
     one_year_ago = last_date - relativedelta(months= 12)
